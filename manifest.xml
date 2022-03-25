@@ -12,7 +12,7 @@
     <hal format="hidl">
         <name>android.hardware.biometrics.fingerprint</name>
         <transport>hwbinder</transport>
-        <fqname>@2.3::IBiometricsFingerprint/default</fqname>
+        <fqname>@2.1::IBiometricsFingerprint/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
@@ -52,11 +52,6 @@
         <fqname>@1.0::IConsumerIr/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.keymaster</name>
-        <transport>hwbinder</transport>
-        <fqname>@4.0::IKeymasterDevice/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.media.omx</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::IOmx/default</fqname>
@@ -79,11 +74,6 @@
         <name>android.hardware.radio.config</name>
         <transport>hwbinder</transport>
         <fqname>@1.1::IRadioConfig/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.secure_element</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.2::ISecureElement/SIM1</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.sensors</name>
@@ -202,8 +192,8 @@
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.ims</name>
         <transport>hwbinder</transport>
-        <fqname>@1.6::IImsRadio/imsradio0</fqname>
-        <fqname>@1.6::IImsRadio/imsradio1</fqname>
+        <fqname>@1.7::IImsRadio/imsradio0</fqname>
+        <fqname>@1.7::IImsRadio/imsradio1</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.internal.deviceinfo</name>
@@ -306,12 +296,7 @@
         <fqname>@1.0::IXiaomiFingerprint/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.xiaomi.hardware.motor</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IMotor/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.xiaomi.hardware.touchfeature</name>
+        <name>vendor.xiaomi.hw.touchfeature</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::ITouchFeature/default</fqname>
     </hal>

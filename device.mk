@@ -6,18 +6,16 @@
 
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/xiaomi/sm8250-common/sm8250-common-vendor.mk)
+$(call inherit-product, vendor/xiaomi/spes/spes-vendor.mk)
 
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-
-# Setup dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -75,6 +73,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 endif
 
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
+
 # Atrace
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
@@ -88,7 +90,7 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.3-impl \
     audio.a2dp.default \
     audio.bluetooth.default \
-    audio.primary.kona \
+    audio.primary.bengal \
     audio.r_submix.default \
     audio.usb.default \
     liba2dpoffload \
@@ -126,6 +128,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.bluetooth_audio@2.0.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2400
+TARGET_SCREEN_WIDTH := 1080
+
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
@@ -136,10 +142,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libstdc++.vendor
-
-# Camera motor
-PRODUCT_PACKAGES += \
-    vendor.xiaomi.hardware.motor@1.0.vendor
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -176,7 +178,7 @@ PRODUCT_PACKAGES += \
     libsdmutils \
     libtinyxml \
     libvulkan \
-    memtrack.kona \
+    memtrack.bengal \
     vendor.display.config@1.5 \
     vendor.display.config@1.11.vendor \
     vendor.display.config@2.0 \
@@ -199,11 +201,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.xiaomi_kona
-	
-# FOD
-TARGET_HAS_UDFPS := true
-EXTRA_UDFPS_ANIMATIONS := true
+    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_spes
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
@@ -243,7 +241,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.xiaomi_kona
+    android.hardware.lights-service.xiaomi_spes
 
 # Media
 PRODUCT_PACKAGES += \
@@ -269,16 +267,6 @@ PRODUCT_PACKAGES += \
 # Neural networks
 PRODUCT_PACKAGES += \
     android.hardware.neuralnetworks@1.3.vendor
-
-# NFC
-PRODUCT_PACKAGES += \
-    android.hardware.nfc_snxxx@1.2-service \
-    com.android.nfc_extras \
-    libchrome.vendor \
-    NfcNci \
-    SecureElement \
-    Tag \
-    android.hardware.secure_element@1.2.vendor
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
@@ -341,8 +329,6 @@ PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.mdm.sh \
     init.mi.btmac.sh \
-    init.motor.rc \
-    init.nfc.rc \
     init.qcom.rc \
     init.qcom.sh \
     init.qcom.early_boot.sh \
@@ -396,7 +382,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.xiaomi_kona
+    vendor.qti.hardware.vibrator.service.xiaomi_spes
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

@@ -1,0 +1,4 @@
+service vendor.qti.vibrator.xiaomi_spes /vendor/bin/hw/vendor.qti.hardware.vibrator.service.xiaomi_spes
+    class hal
+    user system
+    group system input

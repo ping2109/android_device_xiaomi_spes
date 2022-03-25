@@ -25,24 +25,11 @@ source "${HELPER}"
 setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true
 
 # Warning headers and guards
-write_headers "alioth apollon cas cmi elish enuma lmi thyme umi"
+write_headers "spes spesn"
 
 # The standard common blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
+write_makefiles "${MY_DIR}/proprietary-files-spes.txt" true
 
 # Finish
 write_footers
-
-if [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
-    # Reinitialize the helper for device
-    setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false
-
-    # Warning headers and guards
-    write_headers
-
-    # The standard device blobs
-    write_makefiles "${MY_DIR}/../${DEVICE}/proprietary-files.txt" true
-
-    # Finish
-    write_footers
-fi
