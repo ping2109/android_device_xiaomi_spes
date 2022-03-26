@@ -101,6 +101,7 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.console=ttyMSM0 an
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_KERNEL_ARCH := arm64
 #TARGET_KERNEL_CLANG_COMPILE := true
@@ -109,7 +110,6 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel/Image.gz-dtb
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/kernel/dtbo.img
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/kernel/dtb
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-TARGET_FORCE_PREBUILT_KERNEL := true
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE := spes,spesn
