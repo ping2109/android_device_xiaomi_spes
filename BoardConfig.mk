@@ -121,7 +121,7 @@ TARGET_KERNEL_SOURCE := kernel/xiaomi/spes
 TARGET_KERNEL_CONFIG := vendor/bengal-perf_defconfig
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel/kernel
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/kernel/dtbo.img
-BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/kernel/dtb
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/kernel/dtb
 TARGET_FORCE_PREBUILT_KERNEL := true
 
 # OTA assert
