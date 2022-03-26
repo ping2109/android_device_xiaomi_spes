@@ -17,6 +17,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
+# Kernel
+
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel/kernel
+LOCAL_DTB := $(LOCAL_PATH)/kernel/dtb
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_DTB):dtb \
+    $(TARGET_PREBUILT_KERNEL):kernel \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/kernel/vendor-modules,$(TARGET_COPY_OUT_VENDOR)/lib/modules) \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/kernel/ramdisk-modules,$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules)
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
