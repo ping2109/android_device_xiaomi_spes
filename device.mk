@@ -20,10 +20,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Kernel
 
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel/kernel
-LOCAL_DTB := $(LOCAL_PATH)/kernel/dtb
+LOCAL_DTB := $(LOCAL_PATH)/kernel/dtb.img
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_DTB):dtb \
+    $(LOCAL_DTB):dtb.img \
     $(TARGET_PREBUILT_KERNEL):kernel \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/kernel/vendor-modules,$(TARGET_COPY_OUT_VENDOR)/lib/modules) \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/kernel/ramdisk-modules,$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules)
