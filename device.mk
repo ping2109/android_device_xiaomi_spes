@@ -10,8 +10,8 @@ TARGET_IS_VAB := true
 # Audio
 TARGET_ENABLE_AUDIO_ULL := true
 
-# Inherit from sm8250-common
-$(call inherit-product, device/xiaomi/sm8250-common/kona.mk)
+# Inherit from sm6225-common
+$(call inherit-product, device/xiaomi/sm6225-common/bengal.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -37,4 +37,4 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
 # Inherit from vendor blobs
-$(call inherit-product, vendor/xiaomi/alioth/alioth-vendor.mk)
+$(call inherit-product, vendor/xiaomi/spes/spes-vendor.mk)

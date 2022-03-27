@@ -5,9 +5,9 @@
 //
 
 cc_library_static {
-    name: "init_xiaomi_alioth",
-    srcs: ["init_xiaomi_alioth.cpp"],
-    whole_static_libs: ["//device/xiaomi/sm8250-common:libinit_xiaomi_kona"],
+    name: "init_xiaomi_spes",
+    srcs: ["init_xiaomi_spes.cpp"],
+    whole_static_libs: ["//device/xiaomi/sm6225-common:libinit_xiaomi_bengal"],
     include_dirs: ["system/core/init"],
     recovery_available: true,
 }
