@@ -15,6 +15,7 @@ BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 RELAX_USES_LIBRARY_CHECK=true
 
 # A/B
+ifeq ($(TARGET_IS_VAB),true)
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 AB_OTA_UPDATER := true
@@ -29,7 +30,9 @@ AB_OTA_PARTITIONS += \
     vbmeta_system \
     vendor \
     vendor_boot
+endif
 
+TARGET_IS_VAB := true
 
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
