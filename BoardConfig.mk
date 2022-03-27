@@ -32,8 +32,6 @@ AB_OTA_PARTITIONS += \
     vendor_boot
 endif
 
-TARGET_IS_VAB := true
-
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
