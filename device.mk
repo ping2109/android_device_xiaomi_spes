@@ -13,6 +13,14 @@ TARGET_ENABLE_AUDIO_ULL := true
 # Inherit from sm6225-common
 $(call inherit-product, device/xiaomi/sm6225-common/bengal.mk)
 
+# Kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel/kernel
+LOCAL_DTB := $(LOCAL_PATH)/kernel/dtb.img
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_DTB):dtb.img \
+    $(TARGET_PREBUILT_KERNEL):kernel
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
