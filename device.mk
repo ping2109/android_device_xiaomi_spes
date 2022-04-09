@@ -51,12 +51,6 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     bootctrl.bengal
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.bengal \
-    libgptutils \
-    libz \
-    libcutils
-
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
