@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/juice
+DEVICE_PATH := device/xiaomi/spes
 
 # Broken Rules
 BUILD_BROKEN_DUP_RULES := true
@@ -33,7 +33,7 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := lime,citrus,lemon,pomelo,juice
+TARGET_OTA_ASSERT_DEVICE := spes,spesn
 
 # Audio
 AUDIO_FEATURE_ENABLED_HDMI_SPK := true
@@ -64,8 +64,8 @@ TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 HWUI_COMPILE_FOR_PERF := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_juice
-TARGET_RECOVERY_DEVICE_MODULES := libinit_juice
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_spes
+TARGET_RECOVERY_DEVICE_MODULES := libinit_spes
 
 # Kernel
 BOARD_KERNEL_CMDLINE := \
@@ -93,7 +93,7 @@ BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADERS := kernel/xiaomi/juice
+TARGET_KERNEL_HEADERS := kernel/xiaomi/spes
 
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
@@ -191,4 +191,4 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 # Inherit from the proprietary version
--include vendor/xiaomi/juice/BoardConfigVendor.mk
+-include vendor/xiaomi/spes/BoardConfigVendor.mk

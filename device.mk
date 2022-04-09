@@ -22,7 +22,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 $(call inherit-product, vendor/qcom/opensource/commonsys-intf/bluetooth/bt-system-opensource-product.mk)
 
 # Inherit from vendor if exists
-$(call inherit-product-if-exists, vendor/xiaomi/juice/juice-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/spes/spes-vendor.mk)
 
 # Soong Namespace
 PRODUCT_SOONG_NAMESPACES += \
@@ -126,7 +126,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.xiaomi_juice
+    android.hardware.light-service.xiaomi
     
 # NFC
 PRODUCT_PACKAGES += \
@@ -182,8 +182,8 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.2.vendor
 
 # Shipping API
-PRODUCT_SHIPPING_API_LEVEL := 29
-BOARD_SHIPPING_API_LEVEL := 29
+PRODUCT_SHIPPING_API_LEVEL := 30
+BOARD_SHIPPING_API_LEVEL := 30
 
 # Target VNDK
 PRODUCT_TARGET_VNDK_VERSION := 30
@@ -204,27 +204,26 @@ PRODUCT_BOOT_JARS += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl \
-    android.hardware.vibrator@1.0-service
+    vendor.qti.hardware.vibrator.service
+
+PRODUCT_COPY_FILES += \
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
 # Vendor Overlay
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/vendor-overlay/,$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION))
-
-PRODUCT_PACKAGES += \
-    AospFrameworkResOverlay \
-    AospWifiResOverlay \
-    CarrierConfigResCommon \
-    CellBroadcastReceiverResCommon \
-    FrameworksResCommon \
-    FrameworksResTarget \
-    GmsTelecommOverlay \
-    GmsTelephonyOverlay \
-    NotchBarKiller \
-    SystemUIResCommon \
-    TelecommResCommon \
-    TelephonyResCommon \
-    WifiResCommon
+#PRODUCT_PACKAGES += \
+#    AospFrameworkResOverlay \
+#    AospWifiResOverlay \
+#    CarrierConfigResCommon \
+#    CellBroadcastReceiverResCommon \
+#    FrameworksResCommon \
+#    FrameworksResTarget \
+#    GmsTelecommOverlay \
+#    GmsTelephonyOverlay \
+#    NotchBarKiller \
+#    SystemUIResCommon \
+#    TelecommResCommon \
+#    TelephonyResCommon \
+#    WifiResCommon
 
 -include $(LOCAL_PATH)/product_prop.mk
 -include $(LOCAL_PATH)/system_prop.mk

@@ -6,7 +6,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter lemon pomelo citrus lime juice,$(TARGET_DEVICE)),)
+ifneq ($(filter spes,$(TARGET_DEVICE)),)
 
 include $(CLEAR_VARS)
 
