@@ -11,14 +11,11 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
-    boot \
-    dtbo \
     product \
     system \
     system_ext \
     vbmeta \
-    vbmeta_system \
-    vendor_boot
+    vbmeta_system
 
 # Broken Rules
 BUILD_BROKEN_DUP_RULES := true
@@ -130,7 +127,6 @@ BOARD_USES_METADATA_PARTITION := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 114553663488
 
