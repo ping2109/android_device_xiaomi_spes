@@ -224,6 +224,3 @@ PRODUCT_COPY_FILES += \
 #    TelecommResCommon \
 #    TelephonyResCommon \
 #    WifiResCommon
-
--include $(LOCAL_PATH)/product_prop.mk
--include $(LOCAL_PATH)/system_prop.mk
