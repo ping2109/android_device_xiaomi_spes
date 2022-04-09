@@ -30,12 +30,47 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/commonsys/packages/apps/Bluetooth \
     vendor/qcom/opensource/commonsys/system/bt
 
-PRODUCT_BUILD_SUPER_PARTITION := true
+PRODUCT_BUILD_SUPER_PARTITION := false
 BOARD_BUILD_PRODUCT_IMAGE := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Add default implementation of fastboot HAL.
 PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
+
+# Inherit virtual_ab_ota product
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0-impl-qti \
+    android.hardware.boot@1.0-impl-qti.recovery \
+    android.hardware.boot@1.0-service
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+
+PRODUCT_PACKAGES += \
+    bootctrl.bengal
+
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.bengal \
+    libgptutils \
+    libz \
+    libcutils
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
+
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_engine_sideload \
+    update_verifier
+
+PRODUCT_PACKAGES += \
+    checkpoint_gc \
+    otapreopt_script
 
 # APN
 PRODUCT_COPY_FILES += \
