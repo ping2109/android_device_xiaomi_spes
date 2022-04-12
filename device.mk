@@ -31,6 +31,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/commonsys/system/bt
 
 PRODUCT_BUILD_SUPER_PARTITION := false
+BOARD_BUILD_PRODUCT_IMAGE := true
 BUILD_WITHOUT_VENDOR := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
