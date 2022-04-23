@@ -425,15 +425,13 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     fstab.default \
+    fstab.default_ramdisk \
     fstab.emmc \
     init.qcom.rc \
     init.recovery.qcom.rc \
     init.stnfc rc \
     init.target.rc \
     ueventd.qcom.rc
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.default:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.default
 
 # Sensors
 PRODUCT_PACKAGES += \
