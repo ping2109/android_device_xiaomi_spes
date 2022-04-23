@@ -163,6 +163,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CONFIG := vendor/bengal_defconfig
 TARGET_KERNEL_HEADERS := kernel/xiaomi/spes
 TARGET_KERNEL_SOURCE := kernel/xiaomi/spes
+TARGET_KERNEL_VERSION := 4.19
 
 # Media
 TARGET_DISABLED_UBWC := true
