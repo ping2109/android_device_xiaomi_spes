@@ -48,9 +48,6 @@ vendor/lib/rfsa/adsp/misound_res_spk.bin
 vendor/lib/hw/audio.primary.bengal.so
 vendor/lib/liba2dpoffload.so
 vendor/lib/libaudio_log_utils.so
-vendor/lib64/hw/audio.primary.bengal.so
-vendor/lib64/liba2dpoffload.so
-vendor/lib64/libaudio_log_utils.so
 
 # Camera
 vendor/bin/f2player
