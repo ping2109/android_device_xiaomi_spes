@@ -114,6 +114,9 @@ BOARD_USES_METADATA_PARTITION := true
 # OpenGL
 USE_OPENGL_RENDERER := true
 
+# OTA assert
+TARGET_OTA_ASSERT_DEVICE := spes,spesn
+
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(DEVICE_PATH)/configs/hidl/framework_compatibility_matrix.xml
