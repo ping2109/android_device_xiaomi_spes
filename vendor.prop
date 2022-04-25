@@ -294,4 +294,4 @@ ro.telephony.iwlan_operation_mode=legacy
 
 # SoC
 ro.soc.manufacturer=Qualcomm
-ro.soc.model=SM6225
+ro.soc.model=SM6115
