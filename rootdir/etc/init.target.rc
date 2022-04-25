@@ -50,7 +50,7 @@ on early-fs
 
 on fs
     start hwservicemanager
-    mount_all --early
+    mount_all /vendor/etc/fstab.default --early
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
     restorecon_recursive /mnt/vendor/persist
