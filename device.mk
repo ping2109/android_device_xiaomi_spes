@@ -17,6 +17,14 @@ TARGET_SCREEN_WIDTH := 1080
 
 PRODUCT_SHIPPING_API_LEVEL := 30
 
+# Prebuilt kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
+LOCAL_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_DTB):dtb.img \
+    $(TARGET_PREBUILT_KERNEL):kernel
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
