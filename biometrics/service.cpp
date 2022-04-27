@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.xiaomi_kona"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.spes"
 
 #include <android/log.h>
 #include <hidl/HidlSupport.h>
 #include <hidl/HidlTransportSupport.h>
-#include <android/hardware/biometrics/fingerprint/2.3/IBiometricsFingerprint.h>
-#include <android/hardware/biometrics/fingerprint/2.2/types.h>
-#include <vendor/xiaomi/hardware/fingerprintextension/1.0/IXiaomiFingerprint.h>
+#include <android/hardware/biometrics/fingerprint/2.1/IBiometricsFingerprint.h>
+#include <android/hardware/biometrics/fingerprint/2.1/types.h>
 #include "BiometricsFingerprint.h"
 
-using android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint;
-using android::hardware::biometrics::fingerprint::V2_3::implementation::BiometricsFingerprint;
+using android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint;
+using android::hardware::biometrics::fingerprint::V2_1::implementation::BiometricsFingerprint;
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 using android::sp;
-using vendor::xiaomi::hardware::fingerprintextension::V1_0::IXiaomiFingerprint;
 
 int main() {
     android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
-    android::sp<IXiaomiFingerprint> xfe = BiometricsFingerprint::getXiaomiInstance();
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
@@ -43,14 +40,6 @@ int main() {
         }
     } else {
         ALOGE("Can't create instance of BiometricsFingerprint, nullptr");
-    }
-
-    if (xfe != nullptr) {
-        if (::android::OK != xfe->registerAsService()) {
-            return 1;
-        }
-    } else {
-        ALOGE("Can't create instance of XiaomiFingerprint, nullptr");
     }
 
     joinRpcThreadpool();

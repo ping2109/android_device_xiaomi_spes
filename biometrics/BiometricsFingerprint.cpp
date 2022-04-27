@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2021 The LineageOS Project
+ * Copyright (C) 2018-2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,110 +14,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.xiaomi_kona"
-#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.3-service.xiaomi_kona"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.spes"
+#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.1-service.spes"
 
-#include <android-base/logging.h>
-#include <android-base/properties.h>
 #include <hardware/hw_auth_token.h>
 
-#include "xiaomi_fingerprint.h"
+#include <hardware/hardware.h>
+#include <hardware/fingerprint.h>
 #include "BiometricsFingerprint.h"
 
-#include <cutils/properties.h>
 #include <inttypes.h>
-#include <poll.h>
-#include <thread>
 #include <unistd.h>
 
 namespace android {
 namespace hardware {
 namespace biometrics {
 namespace fingerprint {
-namespace V2_3 {
+namespace V2_1 {
 namespace implementation {
 
 // Supported fingerprint HAL version
 static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 
-// List of fingerprint HALs
-static const char *kHALClasses[] = {
-    "fpc",
-    "fpc_fod",
-    "goodix",
-    "goodix_fod",
-    "goodix_fod6",
-};
-
 using RequestStatus =
         android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
-using ::android::base::GetBoolProperty;
 
 BiometricsFingerprint *BiometricsFingerprint::sInstance = nullptr;
 
-#define COMMAND_NIT 10
-#define PARAM_NIT_FOD 1
-#define PARAM_NIT_NONE 0
-
-#define FOD_UI_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui"
-
-static bool readBool(int fd) {
-    char c;
-    int rc;
-
-    rc = lseek(fd, 0, SEEK_SET);
-    if (rc) {
-        LOG(ERROR) << "failed to seek fd, err: " << rc;
-        return false;
-    }
-
-    rc = read(fd, &c, sizeof(char));
-    if (rc != 1) {
-        LOG(ERROR) << "failed to read bool from fd, err: " << rc;
-        return false;
-    }
-
-    return c != '0';
-}
-
 BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevice(nullptr) {
     sInstance = this; // keep track of the most recent instance
-    for (const auto& class_name : kHALClasses) {
-        mDevice = openHal(class_name);
-        if (!mDevice) {
-            ALOGE("Can't open HAL module, class %s", class_name);
-        } else {
-            ALOGI("Opened fingerprint HAL, class %s", class_name);
-            property_set("persist.vendor.sys.fp.vendor", class_name); // fix AliPay TouchID
-            break;
-        }
-    }
-    mFod = GetBoolProperty("vendor.lineage.fod.enable", false);
-
-    if (mFod) {
-        std::thread([this]() {
-            int fd = open(FOD_UI_PATH, O_RDONLY);
-            if (fd < 0) {
-                LOG(ERROR) << "failed to open fd, err: " << fd;
-                return;
-            }
-
-            struct pollfd fodUiPoll = {
-                .fd = fd,
-                .events = POLLERR | POLLPRI,
-                .revents = 0,
-            };
-
-            while (true) {
-                int rc = poll(&fodUiPoll, 1, -1);
-                if (rc < 0) {
-                    LOG(ERROR) << "failed to poll fd, err: " << rc;
-                    continue;
-                }
-
-                extCmd(COMMAND_NIT, readBool(fd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
-            }
-        }).detach();
+    mDevice = openHal();
+    if (!mDevice) {
+        ALOGE("Can't open HAL module");
     }
 }
 
@@ -284,53 +212,74 @@ IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
     return sInstance;
 }
 
-IXiaomiFingerprint* BiometricsFingerprint::getXiaomiInstance() {
-    if (!sInstance) {
-      sInstance = new BiometricsFingerprint();
-    }
-    return sInstance;
-}
-
-xiaomi_fingerprint_device_t* BiometricsFingerprint::openHal(const char *class_name) {
+fingerprint_device_t* getDeviceForVendor(const char *class_name) {
     int err;
     const hw_module_t *hw_mdl = nullptr;
     ALOGD("Opening fingerprint hal library...");
     if (0 != (err = hw_get_module_by_class(FINGERPRINT_HARDWARE_MODULE_ID, class_name, &hw_mdl))) {
-        ALOGE("Can't open fingerprint HW Module, class %s, error: %d", class_name, err);
+        ALOGE("Can't open fingerprint HW Module, class: %s, error: %d", class_name, err);
         return nullptr;
     }
 
     if (hw_mdl == nullptr) {
-        ALOGE("No valid fingerprint module, class %s", class_name);
+        ALOGE("No valid fingerprint module, class: %s", class_name);
         return nullptr;
     }
 
     fingerprint_module_t const *module =
         reinterpret_cast<const fingerprint_module_t*>(hw_mdl);
     if (module->common.methods->open == nullptr) {
-        ALOGE("No valid open method, class %s", class_name);
+        ALOGE("No valid open method, class: %s", class_name);
         return nullptr;
     }
 
     hw_device_t *device = nullptr;
 
     if (0 != (err = module->common.methods->open(hw_mdl, nullptr, &device))) {
-        ALOGE("Can't open fingerprint methods, class %s, error: %d", class_name, err);
+        ALOGE("Can't open fingerprint methods, class: %s, error: %d", class_name, err);
         return nullptr;
     }
 
     if (kVersion != device->version) {
         // enforce version on new devices because of HIDL@2.1 translation layer
-        ALOGE("Wrong fp version, class %s. Expected %d, got %d", class_name, kVersion, device->version);
+        ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
         return nullptr;
     }
 
-    xiaomi_fingerprint_device_t* fp_device =
-        reinterpret_cast<xiaomi_fingerprint_device_t*>(device);
+    fingerprint_device_t* fp_device =
+        reinterpret_cast<fingerprint_device_t*>(device);
+
+    ALOGI("Loaded fingerprint module, class: %s", class_name);
+    return fp_device;
+}
+
+fingerprint_device_t* getFingerprintDevice() {
+    fingerprint_device_t *fp_device;
+    std::string vendor_modules[] = { "fpc", "goodix" };
+
+    for (const auto& vendor : vendor_modules) {
+        if ((fp_device = getDeviceForVendor(vendor.c_str())) == nullptr) {
+            ALOGE("Failed to load %s fingerprint module", vendor.c_str());
+            continue;
+        }
+        return fp_device;
+    }
+
+    return nullptr;
+}
+
+fingerprint_device_t* BiometricsFingerprint::openHal() {
+    int err;
+
+    fingerprint_device_t *fp_device;
+    fp_device = getFingerprintDevice();
+    if (fp_device == nullptr) {
+        return nullptr;
+    }
 
     if (0 != (err =
             fp_device->set_notify(fp_device, BiometricsFingerprint::notify))) {
-        ALOGE("Can't register fingerprint module callback, class %s, error: %d", class_name, err);
+        ALOGE("Can't register fingerprint module callback, error: %d", err);
         return nullptr;
     }
 
@@ -430,25 +379,8 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
     }
 }
 
-Return<bool> BiometricsFingerprint::isUdfps(uint32_t /*sensorId*/) {
-    return mFod;
-}
-
-Return<void> BiometricsFingerprint::onFingerDown(uint32_t /*x*/, uint32_t /*y*/,
-        float /*minor*/, float /*major*/) {
-    return Void();
-}
-
-Return<void> BiometricsFingerprint::onFingerUp() {
-    return Void();
-}
-
-Return<int32_t> BiometricsFingerprint::extCmd(int32_t cmd, int32_t param) {
-    return mDevice->extCmd(mDevice, cmd, param);
-}
-
 } // namespace implementation
-}  // namespace V2_3
+}  // namespace V2_1
 }  // namespace fingerprint
 }  // namespace biometrics
 }  // namespace hardware
