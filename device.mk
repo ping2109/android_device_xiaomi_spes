@@ -23,6 +23,14 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # API level
 PRODUCT_SHIPPING_API_LEVEL := 30
 
+# Prebuilt kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
+LOCAL_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_DTB):dtb.img \
+    $(TARGET_PREBUILT_KERNEL):kernel
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
