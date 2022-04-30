@@ -51,6 +51,7 @@ ro.boot.hwversion                               u:object_r:vendor_public_vendor_
 
 # Mlipay
 persist.vendor.sys.pay                          u:object_r:vendor_tee_listener_prop:s0
+persist.vendor.sys.provision.status             u:object_r:vendor_tee_listener_prop:s0
 
 # NFC
 ro.nfc.port                                     u:object_r:vendor_nfc_prop:s0
@@ -59,6 +60,7 @@ ro.nfc.port                                     u:object_r:vendor_nfc_prop:s0
 persist.backup.ntpServer                        u:object_r:vendor_ntp_prop:s0
 
 # RIL
+ro.ril.oem.wifimac                              u:object_r:vendor_public_vendor_default_prop:s0
 ro.vendor.ril                                   u:object_r:vendor_public_vendor_default_prop:s0
 ril.subscription.types                          u:object_r:vendor_public_vendor_default_prop:s0
 rild.libpath                                    u:object_r:vendor_public_vendor_default_prop:s0

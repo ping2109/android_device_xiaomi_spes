@@ -12,7 +12,8 @@ allow init hwservicemanager:binder { call transfer };
 allow init hwservicemanager:binder { transfer };
 allow init nfc:binder { call };
 allow init proc:file { write };
-allow init sysfs:file setattr;
+allow init sysfs:file rw_file_perms;
+allow init self:capability2 mac_admin;
 
 allow init per_boot_file:file ioctl;
 allowxperm init per_boot_file:file ioctl { F2FS_IOC_SET_PIN_FILE };
