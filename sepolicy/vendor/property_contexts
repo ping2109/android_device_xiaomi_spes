@@ -34,6 +34,7 @@ ro.vendor.display.default_fps                   u:object_r:vendor_displayfeature
 ro.vendor.cabc.enable                           u:object_r:vendor_displayfeature_prop:s0
 ro.vendor.bcbc.enable                           u:object_r:vendor_displayfeature_prop:s0
 ro.vendor.dfps.enable                           u:object_r:vendor_displayfeature_prop:s0
+persist.demo.hdmirotationlock                   u:object_r:vendor_displayfeature_prop:s0
 
 # Fingerprint
 persist.vendor.fpc.                             u:object_r:vendor_fp_prop:s0
@@ -42,6 +43,7 @@ ro.hardware.fp                                  u:object_r:vendor_fp_prop:s0
 vendor.fps_hal.                                 u:object_r:vendor_fp_prop:s0
 vendor.sys.fp                                   u:object_r:vendor_fp_prop:s0
 ro.boot.fpsensor                                u:object_r:vendor_fp_prop:s0
+ro.hardware.fp.sideCap                          u:object_r:vendor_fp_prop:s0
 
 # Global
 ro.boot.factorybuild                            u:object_r:vendor_public_vendor_default_prop:s0
@@ -50,8 +52,19 @@ ro.boot.hwversion                               u:object_r:vendor_public_vendor_
 # Mlipay
 persist.vendor.sys.pay                          u:object_r:vendor_tee_listener_prop:s0
 
+# NFC
+ro.nfc.port                                     u:object_r:vendor_nfc_prop:s0
+
+# NTP
+persist.backup.ntpServer                        u:object_r:vendor_ntp_prop:s0
+
 # RIL
 ro.vendor.ril                                   u:object_r:vendor_public_vendor_default_prop:s0
+ril.subscription.types                          u:object_r:vendor_public_vendor_default_prop:s0
+rild.libpath                                    u:object_r:vendor_public_vendor_default_prop:s0
+persist.data.                                   u:object_r:vendor_public_vendor_default_prop:s0
+persist.rmnet.data.enable                       u:object_r:vendor_public_vendor_default_prop:s0
+persist.cne.feature                             u:object_r:vendor_public_vendor_default_prop:s0
 
 # Thermal
 vendor.sys.thermal.                             u:object_r:vendor_thermal_normal_prop:s0
