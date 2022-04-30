@@ -1,5 +1,6 @@
 type hal_touchfeature_hwservice_xiaomi, hwservice_manager_type;
 type touchfeature_device, dev_type;
+type vendor_touchfeature_prop, property_type;
 
 type hal_touchfeature_default, domain;
 hal_server_domain(hal_touchfeature_default, hal_touchfeature)
@@ -13,6 +14,6 @@ add_hwservice(hal_touchfeature_server, hal_touchfeature_hwservice_xiaomi)
 allow hal_touchfeature_client hal_touchfeature_hwservice_xiaomi:hwservice_manager find;
 
 allow hal_touchfeature_default touchfeature_device:chr_file rw_file_perms;
-set_prop(hal_touchfeature_default, vendor_hw_touchfeature_prop)
+set_prop(hal_touchfeature_default, vendor_touchfeature_prop)
 
 vndbinder_use(hal_touchfeature_default)
