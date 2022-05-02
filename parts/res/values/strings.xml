@@ -17,4 +17,7 @@
 <resources>
     <!-- Ambient settings -->
     <string name="ambient_enable">Use Ambient display</string>
+
+    <!-- Refresh Rate Settings -->
+    <string name="refresh_rate_tile_title">Refresh Rate</string>
 </resources>
