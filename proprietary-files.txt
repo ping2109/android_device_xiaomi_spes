@@ -863,12 +863,6 @@ vendor/firmware/aw87xxx_acf.bin
 vendor/lib/hw/vulkan.adreno.so|dbcf1f95f364957d79c21970c1994cdeeab087cf
 vendor/lib64/hw/vulkan.adreno.so|9aefb6da610ebda6afc7061275d1e150671cde70
 
-# HotwordEnrollment
--product/priv-app/HotwordEnrollmentOKGoogleHEXAGON/HotwordEnrollmentOKGoogleHEXAGON.apk
--product/priv-app/HotwordEnrollmentXGoogleHEXAGON/HotwordEnrollmentXGoogleHEXAGON.apk
-system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
-system_ext/framework/com.android.hotwordenrollment.common.util.jar
-
 # IMS
 -system_ext/app/uceShimService/uceShimService.apk
 -system_ext/priv-app/ims/ims.apk
