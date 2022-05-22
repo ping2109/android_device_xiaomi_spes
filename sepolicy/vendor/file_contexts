@@ -138,7 +138,7 @@
 /sys/devices/platform/soc/1c40000.qcom,spmi/spmi-0/spmi0-00/1c40000.qcom,spmi:qcom,pm6125@0:vadc@3100/iio:device0(/.*)?         u:object_r:vendor_sysfs_iio:s0
 
 # Shell
-/vendor/bin/init.display.refresh.sh                                     u:object_r:vendor_display_refresh_exec:s0
+/vendor/bin/init.display.refresh.sh                                     u:object_r:vendor_qti_init_shell_exec:s0
 
 # SSR
 /sys/devices(/platform)?/soc/[a-z0-9\.:]+,[a-z0-9\-\_]+/subsys[0-9]+/name         u:object_r:vendor_sysfs_ssr:s0
