@@ -11,6 +11,8 @@ set_prop(vendor_qti_init_shell, ctl_stop_prop)
 set_prop(vendor_qti_init_shell, vendor_bluetooth_prop)
 
 # allow init.display.refresh.sh to access vndbinder
+allow vendor_qti_init_shell vendor_file:dir search;
 allow vendor_qti_init_shell vendor_file:file rx_file_perms;
+allow vendor_qti_init_shell vndbinder_device:chr_file rw_file_perms;
 binder_call(vendor_qti_init_shell, hal_graphics_composer_default)
 vndbinder_use(vendor_qti_init_shell)
