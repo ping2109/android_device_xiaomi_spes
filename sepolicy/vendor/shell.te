@@ -1,1 +1,1 @@
-allow shell vendor_qti_init_shell:file rw_file_perms;
+allow shell vendor_qti_init_shell:file rx_file_perms;
