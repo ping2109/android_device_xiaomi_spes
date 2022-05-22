@@ -4,3 +4,5 @@ type vendor_display_refresh_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(vendor_display_refresh)
 
 allow vendor_display_refresh vendor_file:file execute_no_trans;
+
+binder_call(vendor_display_refresh, servicemanager)
