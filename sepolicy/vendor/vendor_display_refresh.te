@@ -7,3 +7,4 @@ allow vendor_display_refresh vendor_file:file execute_no_trans;
 allow vendor_display_refresh vndbinder_device:chr_file rw_file_perms;
 
 binder_call(vendor_display_refresh, servicemanager)
+binder_call(vendor_display_refresh, vndservicemanager)
