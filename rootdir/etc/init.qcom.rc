@@ -357,7 +357,7 @@ service vendor.qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
 service vendor.display-refresh /vendor/bin/init.display.refresh.sh
     class late_start
     user root
-    group root
+    group root system wakelock graphics
     disabled
     oneshot
 
