@@ -1,6 +1,5 @@
 type vendor_charger, domain;
 type vendor_charger_exec, exec_type, vendor_file_type, file_type;
-typeattribute vendor_charger coredomain;
 
 init_daemon_domain(vendor_charger)
 
