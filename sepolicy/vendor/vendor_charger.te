@@ -1,5 +1,6 @@
 type vendor_charger, domain;
 type vendor_charger_exec, exec_type, vendor_file_type, file_type;
+typeattribute vendor_charger coredomain;
 
 init_daemon_domain(vendor_charger)
 
@@ -72,3 +73,16 @@ allow vendor_charger proc_sysrq:file rw_file_perms;
 allow vendor_charger properties_device:dir { r_dir_perms };
 
 hal_client_domain(vendor_charger, hal_health)
+
+# charger needs to tell init to continue the boot
+# process when running in charger mode.
+set_prop(vendor_charger, system_prop)
+set_prop(vendor_charger, exported_system_prop)
+set_prop(vendor_charger, exported3_system_prop)
+set_prop(vendor_charger, charger_status_prop)
+
+get_prop(vendor_charger, charger_prop)
+get_prop(vendor_charger, charger_config_prop)
+
+# get minui properties
+get_prop(vendor_charger, recovery_config_prop)
