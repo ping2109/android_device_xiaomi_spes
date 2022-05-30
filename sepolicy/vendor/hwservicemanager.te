@@ -1,1 +1,6 @@
 allow hwservicemanager hal_displayfeature_default:binder { call transfer };
+
+allow hwservicemanager charger:binder { call transfer };
+allow hwservicemanager charger:dir search;
+allow hwservicemanager charger:file { read map open };
+allow hwservicemanager charger:process getattr;

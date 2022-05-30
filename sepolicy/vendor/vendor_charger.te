@@ -4,7 +4,16 @@ type vendor_charger_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(vendor_charger)
 
 allow vendor_charger self:capability sys_boot;
-allow vendor_charger self:capability2 { block_suspend wake_alarm };
+allow vendor_charger self:cap_userns sys_boot;
+allow vendor_charger self:capability2 block_suspend;
+allow vendor_charger self:cap2_userns block_suspend;
+allow vendor_charger system_suspend_server:binder { call transfer };
+allow system_suspend_server charger:binder transfer;
+allow vendor_charger system_suspend_server:fd use;
+allow vendor_charger system_suspend_hwservice:hwservice_manager find;
+allow vendor_charger hwservicemanager:binder { call transfer };
+allow vendor_charger hidl_manager_hwservice:hwservice_manager find;
+allow vendor_charger init:unix_stream_socket connectto;
 r_dir_file(vendor_charger, vendor_sysfs_battery_supply)
 r_dir_file(vendor_charger, vendor_sysfs_usb_supply)
 
@@ -20,9 +29,6 @@ allow vendor_charger {
   file
   lnk_file
 } rw_file_perms;
-
-# required to read /res/images/charger/
-allow vendor_charger rootfs:file r_file_perms;
 
 dontaudit vendor_charger device:dir r_dir_perms;
 dontaudit vendor_charger self:capability sys_admin;
@@ -44,7 +50,7 @@ allow vendor_charger self:global_capability_class_set sys_boot;
 
 wakelock_use(vendor_charger)
 
-allow vendor_charger self:netlink_kobject_uevent_socket { bind create read setopt };
+allow vendor_charger self:netlink_kobject_uevent_socket create_file_perms;
 
 # Read/write to /sys/power/state
 allow vendor_charger sysfs_power:file rw_file_perms;
