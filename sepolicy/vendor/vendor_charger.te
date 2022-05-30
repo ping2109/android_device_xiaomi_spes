@@ -78,10 +78,8 @@ hal_client_domain(vendor_charger, hal_health)
 set_prop(vendor_charger, system_prop)
 set_prop(vendor_charger, exported_system_prop)
 set_prop(vendor_charger, exported3_system_prop)
-set_prop(vendor_charger, charger_status_prop)
 
 get_prop(vendor_charger, charger_prop)
-get_prop(vendor_charger, charger_config_prop)
 
 # get minui properties
 get_prop(vendor_charger, recovery_config_prop)
