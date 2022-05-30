@@ -50,7 +50,7 @@ allow vendor_charger self:global_capability_class_set sys_boot;
 
 wakelock_use(vendor_charger)
 
-allow vendor_charger self:netlink_kobject_uevent_socket { bind create read setopt };
+allow vendor_charger self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
 
 # Read/write to /sys/power/state
 allow vendor_charger sysfs_power:file rw_file_perms;
