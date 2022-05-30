@@ -1,10 +1,14 @@
 type vendor_charger, domain;
 type vendor_charger_exec, exec_type, vendor_file_type, file_type;
 
-allow vendor_charger self:capability2 wake_alarm;
+init_daemon_domain(vendor_charger)
+
+allow vendor_charger self:capability sys_boot;
+allow vendor_charger self:capability2 { block_suspend wake_alarm };
 r_dir_file(vendor_charger, vendor_sysfs_battery_supply)
 r_dir_file(vendor_charger, vendor_sysfs_usb_supply)
 
+allow vendor_charger sysfs:dir r_dir_perms;
 allow vendor_charger vendor_file:file r_file_perms;
 allow vendor_charger vendor_file:dir r_dir_perms;
 
@@ -16,6 +20,9 @@ allow vendor_charger {
   file
   lnk_file
 } rw_file_perms;
+
+# required to read /res/images/charger/
+allow vendor_charger rootfs:file r_file_perms;
 
 dontaudit vendor_charger device:dir r_dir_perms;
 dontaudit vendor_charger self:capability sys_admin;
@@ -37,7 +44,7 @@ allow vendor_charger self:global_capability_class_set sys_boot;
 
 wakelock_use(vendor_charger)
 
-allow vendor_charger self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow vendor_charger self:netlink_kobject_uevent_socket { bind create read setopt };
 
 # Read/write to /sys/power/state
 allow vendor_charger sysfs_power:file rw_file_perms;
@@ -50,11 +57,18 @@ r_dir_file(vendor_charger, sysfs_batteryinfo)
 allow vendor_charger pstorefs:dir r_dir_perms;
 allow vendor_charger pstorefs:file r_file_perms;
 
+allow vendor_charger sysfs_leds:dir { search };
+allow vendor_charger sysfs_leds:file { rw_file_perms };
+allow vendor_charger sysfs_leds:lnk_file { r_file_perms };
+
 allow vendor_charger graphics_device:dir r_dir_perms;
 allow vendor_charger graphics_device:chr_file rw_file_perms;
 allow vendor_charger input_device:dir r_dir_perms;
 allow vendor_charger input_device:chr_file r_file_perms;
 allow vendor_charger tty_device:chr_file rw_file_perms;
+allow vendor_charger proc_stat:file { r_file_perms };
+allow vendor_charger proc_sysrq:dir { search };
 allow vendor_charger proc_sysrq:file rw_file_perms;
+allow vendor_charger properties_device:dir { r_dir_perms };
 
 hal_client_domain(vendor_charger, hal_health)
