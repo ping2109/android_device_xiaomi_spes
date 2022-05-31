@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_spes.mk
+    $(LOCAL_DIR)/aospa_spes.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_spes-user \
-    lineage_spes-userdebug \
-    lineage_spes-eng
+    aospa_spes-user \
+    aospa_spes-userdebug \
+    aospa_spes-eng
