@@ -26,6 +26,13 @@ $(call inherit-product, vendor/xiaomi/spes/spes-vendor.mk)
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Kernel
+LOCAL_DTBO   := $(LOCAL_PATH)/prebuilt/dtbo.img
+LOCAL_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
+    $(LOCAL_DTBO):dtbo.img
+
 # API level
 PRODUCT_SHIPPING_API_LEVEL := 30
 
