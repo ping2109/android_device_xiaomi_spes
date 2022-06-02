@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2016-2022 crDroid Android Project
+     Copyright (C) 2020-2022 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Whether the device supports Smart Pixels -->
-    <bool name="config_supportSmartPixels">true</bool>
+    <!-- Battery Health Nodes -->
+    <bool name="config_supportBatteryHealth">true</bool>
+    <string name="config_batCurCap" translatable="false">/sys/class/power_supply/bms/charge_counter</string>
+    <string name="config_batDesCap" translatable="false">/sys/class/power_supply/bms/charge_full</string>
+    <string name="config_batChargeCycle" translatable="false">/sys/class/power_supply/bms/cycle_count</string>
 
-    <!-- Smart charging -->
-    <bool name="config_smartChargingAvailable">true</bool>
-    <string name="config_SmartChargingSysfsNode" translatable="false">/sys/class/power_supply/battery/input_suspend</string>
-    <string name="config_SmartChargingSuspendValue" translatable="false">0</string>
-    <string name="config_SmartChargingResumeValue" translatable="false">1</string>
+    <!-- Smart Charging -->
+    <bool name="config_supportSmartCharging">true</bool>
 
 </resources>
