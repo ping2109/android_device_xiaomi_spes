@@ -39,7 +39,6 @@ genfscon sysfs /devices/platform/soc/soc:fpc1020/wakeup_enable                  
 
 # Health
 genfscon sysfs /class/power_supply/battery/capacity                                                 u:object_r:vendor_sysfs_battery_supply:s0
-genfscon sysfs /class/power_supply/battery/input_suspend                                            u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /class/power_supply/bms/charge_counter                                               u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /class/power_supply/bms/charge_full                                                  u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /class/power_supply/bms/cycle_count                                                  u:object_r:vendor_sysfs_battery_supply:s0
