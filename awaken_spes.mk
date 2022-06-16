@@ -20,6 +20,22 @@ $(call inherit-product-if-exists, vendor/gapps/basic/config.mk)
 # Camera
 $(call inherit-product-if-exists, vendor/miuicamera/config.mk)
 
+# Boot Animation Resolution
+TARGET_BOOT_ANIMATION_RES := 1080
+
+# GApps
+TARGET_GAPPS_ARCH := arm64
+USE_GAPPS := true
+
+# Google Recorder
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+
+# Official
+AWAKEN_BUILD_TYPE := UNOFFICIAL
+
+# Quick Tap
+TARGET_SUPPORTS_QUICK_TAP := true
+
 # Product Specifics
 PRODUCT_NAME := awaken_spes
 PRODUCT_DEVICE := spes
@@ -28,9 +44,6 @@ PRODUCT_MODEL := Redmi Note 11
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
-# Overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
